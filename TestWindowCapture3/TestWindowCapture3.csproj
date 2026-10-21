@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.20348.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TestWindowCapture.CsWin32\IGraphicsCaptureItemInterop.cs" Link="Lib\IGraphicsCaptureItemInterop.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LivetCask" Version="4.0.2" />
+    <PackageReference Include="Lvhang.WindowsCapture" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Lib\" />
+  </ItemGroup>
+
+</Project>

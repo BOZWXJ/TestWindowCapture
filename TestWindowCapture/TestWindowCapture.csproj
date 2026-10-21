@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.20348.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LivetCask" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestWindowCapture.CsWin32\TestWindowCapture.CsWin32.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Doc\" />
+  </ItemGroup>
+
+</Project>

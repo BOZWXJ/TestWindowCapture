@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TestWindowCapture.CsWin32/TestWindowCapture.CsWin32.csproj" />
+  <Project Path="TestWindowCapture/TestWindowCapture.csproj" />
+  <Project Path="TestWindowCapture2/TestWindowCapture2.csproj" Id="b366de2d-a4a7-40d9-a15b-a306e7bae41e" />
+  <Project Path="TestWindowCapture3/TestWindowCapture3.csproj" Id="5701aac8-8c91-4b86-8fae-774e9895cb06" />
+</Solution>

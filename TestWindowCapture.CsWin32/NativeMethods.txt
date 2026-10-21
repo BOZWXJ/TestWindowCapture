@@ -1,0 +1,8 @@
+ChildWindowFromPointEx
+ClientToScreen
+DWMWINDOWATTRIBUTE
+DwmGetWindowAttribute
+GetAncestor
+GetClientRect
+GetWindowRect
+WindowFromPoint

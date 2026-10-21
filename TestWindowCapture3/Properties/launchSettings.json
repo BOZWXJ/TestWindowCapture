@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TestWindowCapture3": {
+      "commandName": "Project",
+      "debugEngines": "managed,native"
+    }
+  }
+}
