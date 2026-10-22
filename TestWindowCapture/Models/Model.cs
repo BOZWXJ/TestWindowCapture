@@ -69,31 +69,27 @@ namespace TestWindowCapture.Models
 
 		public void Capture()
 		{
+			if (!CaptureRunning) {
+				return;
+			}
+			// ウィンドウを最前面
+			WindowCapture.WindowToTop(_windowCapture.TargetWindowHandle);
+			// ウィンドウ位置サイズ
+			Rectangle exRect = WindowCapture.GetWindowRect(_windowCapture.TargetWindowHandle, WindowCapture.WindowRectType.ExFrame);
+			System.Diagnostics.Debug.WriteLine($"window {_windowCapture.TargetWindowHandle:x}");
+			System.Diagnostics.Debug.WriteLine($"       {exRect}");
+			// ドキュメント領域
+			Rectangle rect = WindowCapture.GetChildWindow(_windowCapture.TargetWindowHandle, new(exRect.Width / 2, exRect.Height / 2), out nint hCnt);
+			System.Diagnostics.Debug.WriteLine($"client {hCnt:x}");
+			System.Diagnostics.Debug.WriteLine($"       {rect}");
 			// キャプチャ取得
 			var tmp = Volatile.Read(ref bitmap);
 			if (tmp == null) {
 				return;
 			}
-			System.Diagnostics.Debug.WriteLine($"bitmap\t{tmp.Size}");
-
-			nint hWnd = _windowCapture.TargetWindowHandle;
-			// ウィンドウ位置サイズ
-			Rectangle wRect = WindowCapture.GetWindowRect(hWnd, WindowCapture.WindowRectType.Window);
-			System.Diagnostics.Debug.WriteLine($"Window\t{wRect}");
-			Rectangle exRect = WindowCapture.GetWindowRect(hWnd, WindowCapture.WindowRectType.ExFrame);
-			System.Diagnostics.Debug.WriteLine($"ExFrame\t{exRect}");
-			Rectangle cRect = WindowCapture.GetWindowRect(hWnd, WindowCapture.WindowRectType.Client);
-			System.Diagnostics.Debug.WriteLine($"Client\t{cRect}");
-			// ドキュメント領域
-			Rectangle rect = WindowCapture.GetChildWindow(hWnd, new(exRect.Width / 2, exRect.Height / 2), out nint _);
-			System.Diagnostics.Debug.WriteLine($"Doc\t{rect}");
-			//bitmap  {Width=1111, Height = 788}
-			//Window  {X=778, Y = 69, Width = 1125, Height = 795}
-			//ExFrame {X=785, Y = 69, Width = 1111, Height = 788}
-			//Client  {X=786, Y = 69, Width = 1109, Height = 787}
-			//Doc     {X=790, Y = 183, Width = 1101, Height = 669}
+			System.Diagnostics.Debug.WriteLine($"bitmap {tmp.Size}");
+			// 切り抜き
 			rect.Offset(-exRect.X, -exRect.Y);
-			// todo: 切り抜き
 			CapturedBitMap = tmp.Clone(rect, tmp.PixelFormat);
 		}
 

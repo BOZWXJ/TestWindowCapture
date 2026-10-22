@@ -41,8 +41,8 @@ namespace TestWindowCapture.CsWin32
 		public static nint GetWindow(System.Drawing.Point pos)
 		{
 			// ウィンドウハンドル
-			var hWnd = PInvoke.WindowFromPoint(pos);
-			if (hWnd != 0) {
+			HWND hWnd;
+			if (0 != (hWnd = PInvoke.WindowFromPoint(pos))) {
 				// 親ウィンドウ
 				return PInvoke.GetAncestor(hWnd, GET_ANCESTOR_FLAGS.GA_ROOT);
 			}
@@ -92,6 +92,18 @@ namespace TestWindowCapture.CsWin32
 		}
 
 		/// <summary>
+		/// ウィンドウを最前面
+		/// </summary>
+		/// <param name="hWnd"></param>
+		/// <exception cref="Win32Exception"></exception>
+		public static void WindowToTop(nint hWnd)
+		{
+			if (!PInvoke.BringWindowToTop((HWND)hWnd)) {
+				throw new Win32Exception();
+			}
+		}
+
+		/// <summary>
 		/// 指定した位置のコントロールを返す
 		/// </summary>
 		/// <param name="hWnd"></param>
@@ -102,8 +114,7 @@ namespace TestWindowCapture.CsWin32
 		/// <exception cref="Win32Exception"></exception>
 		public static Rectangle GetChildWindow(nint hWnd, System.Drawing.Point pos, out nint hCnt)
 		{
-			hCnt = PInvoke.ChildWindowFromPointEx((HWND)hWnd, pos, CWP_FLAGS.CWP_SKIPDISABLED | CWP_FLAGS.CWP_SKIPINVISIBLE);
-			if (hCnt == 0) {
+			if (0 == (hCnt = PInvoke.ChildWindowFromPointEx((HWND)hWnd, pos, CWP_FLAGS.CWP_ALL))) {
 				throw new InvalidOperationException();
 			}
 			if (!PInvoke.GetClientRect((HWND)hCnt, out RECT cRect)) {

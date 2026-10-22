@@ -1,3 +1,4 @@
+BringWindowToTop
 ChildWindowFromPointEx
 ClientToScreen
 DWMWINDOWATTRIBUTE
